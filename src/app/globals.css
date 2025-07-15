@@ -1,42 +1,76 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
+/* Reset de margin e padding da página */
+html, body {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
-a {
-  color: inherit;
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+.body-flex {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.nextjs-toast{
+    display: none !important;
+}
+
+.main-flex {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.header-principal {
+  width: 100%;
+  background: #1a2238;
+  padding: 2rem 0 1.5rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-principal {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.link-principal {
+  color: #eaeaea;
   text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: color 0.2s;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+.link-principal:hover {
+  color: #a1c4fd;
+}
+
+.footer-principal {
+  width: 100%;
+  background: #f4f6fb;
+  color: #23272f;
+  text-align: center;
+  padding: 1.5rem 0 1.2rem 0;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  margin-top: 3rem;
+  border-top: 1px solid #e0e4ef;
+}
+
+.home-title {
+  text-align: center;
+  margin-top: 3rem;
+  font-size: 2.3rem;
+  font-weight: 700;
+  color: #23272f;
+  letter-spacing: -1px;
 }
