@@ -3,6 +3,20 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import styles from './ofertas.module.css';
 
+// Hook para detectar se é mobile
+function useIsMobile() {
+    const [isMobile, setIsMobile] = useState(false);
+    useEffect(() => {
+        function handleResize() {
+            setIsMobile(window.innerWidth <= 768);
+        }
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+    return isMobile;
+}
+
 export default function Ofertas(){
    
     const [produtos, setProdutos] = useState([]); // Lista completa de produtos vindos da API
@@ -17,6 +31,7 @@ export default function Ofertas(){
     const [precoMax, setPrecoMax] = useState('');// Valor máximo do filtro de preço
     const itensPorPagina = 8;
     const pagina = useRef(1);
+    const isMobile = useIsMobile();
 
     // Busca todos os produtos e categorias da API ao montar o componente
     useEffect(() => {
@@ -97,7 +112,7 @@ export default function Ofertas(){
     return(
         <>
             {/* Banner no topo da página (full width) */}
-            <img src="/img/ofertas.png" alt="Banner Ofertas" className={styles['banner-ofertas']} />
+            <img src={isMobile ? "/img/banner-mobile.png" : "/img/banner-desk.png"} alt="Banner Ofertas" className={styles['banner-ofertas']} />
             {/* Container centralizado para o conteúdo da página de ofertas */}
             <div className={styles['ofertas-container']}>
                 {/* Título da seção */}
@@ -133,7 +148,9 @@ export default function Ofertas(){
                                 {/* Informações do produto */}
                                 <div className={styles['produto-info-wrapper']}>
                                     <h3 className={styles['produto-nome']}>{produto.title}</h3>
-                                    <p className={styles['produto-preco']}>{`R$ ${(produto.price * 5.2).toFixed(2)}`}</p>
+                                    <p className={styles['produto-preco']}>
+                                        {(produto.price * 5.2).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                                    </p>
                                     <button className={styles['produto-btn']}>Comprar</button>
                                 </div>
                             </div>
